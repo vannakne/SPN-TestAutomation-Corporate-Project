@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver.common.by import By
 
 
@@ -184,6 +186,9 @@ class BillPaymentPage:
 
     def clickPay(self):
         self.driver.find_element(By.ID, self.button_pay_id).click()
+
+    def clickRemark(self):
+        self.driver.find_element(By.ID, self.textbox_remark_id).click()
 
     def getPopUpMessage(self):
         self.message = self.driver.find_element(By.CLASS_NAME, self.popUp_message_msg_class).text

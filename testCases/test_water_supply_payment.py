@@ -19,8 +19,8 @@ class Test_004_Electric:
     result_passed = []
     result_failed = []
 
-    def test_006_education(self, setup):
-        print("Start test 006")
+    def test_008_water_supply(self, setup):
+        print("Start test 008")
         self.driver = setup
         self.driver.get(self.baseURL)
         sleep(3)
@@ -65,19 +65,24 @@ class Test_004_Electric:
             elif self.amount_ccy == 'KHR':
                 self.bill.enterAmount('4000')
                 sleep(1)
+            self.bill.clickRemark()
+            sleep(0.5)
             self.bill.clickPay()
+            self.log.info("Second Pay button clicked.")
             sleep(1)
             try:
-                self.bill.clickPay()
-                sleep(1)
                 self.buttonText = self.bill.getConfirmButtonText()
+                self.log.info("Confirm button found.")
                 self.bill.clickConfirm()
+                self.log.info("Confirm button clicked.")
                 sleep(0.5)
                 self.bill.enterTPIN('000000')
                 sleep(0.5)
                 self.bill.clickSubmitTpin()
+                self.log.info("summit Tpin button clicked.")
                 sleep(3)
                 self.bill.clickMakeAnotherTrf()
+                self.log.info("Make Another Transfer button clicked.")
                 print()
                 print(colored("============================================", 'green'))
                 print(colored(self.biller, 'green'))

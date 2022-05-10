@@ -65,13 +65,12 @@ class Test_004_Electric:
             elif self.amount_ccy == 'KHR':
                 self.bill.enterAmount('4000')
                 sleep(1)
+            self.bill.clickRemark()
+            sleep(0.5)
             self.bill.clickPay()
-            print("Pay 1 clicked")
+            self.log.info("Pay button clicked.")
             sleep(1)
             try:
-                self.bill.clickPay()
-                print("Pay 2 clicked")
-                sleep(1)
                 self.buttonText = self.bill.getConfirmButtonText()
                 self.bill.clickConfirm()
                 sleep(0.5)
