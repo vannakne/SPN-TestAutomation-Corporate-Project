@@ -23,7 +23,7 @@ class Test_004_Electric:
         print("Start test 008")
         self.driver = setup
         self.driver.get(self.baseURL)
-        sleep(3)
+        sleep(5)
 
         self.lp = LoginPage(self.driver)
 

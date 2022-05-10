@@ -3,6 +3,17 @@ from selenium.webdriver.common.by import By
 class WalletTransferPage:
 
     ## wallet type
+    all_wallet_type = {
+        'Wing': 'fndtfr__WalletTransfer__sc_col_316_li',
+        'Pipay': 'fndtfr__WalletTransfer__sc_col_317_li',
+        'True Money': 'fndtfr__WalletTransfer__sc_col_319_li',
+        'Bakong': 'fndtfr__WalletTransfer__sc_col_314_li',
+        'Ly Hour Veluy': 'fndtfr__WalletTransfer__sc_col_320_li',
+        'eMoney': 'fndtfr__WalletTransfer__sc_col_322_li',
+        'Visa Direct': 'fndtfr__WalletTransfer__sc_col_323_li',
+        'Local Bank via Bakong': 'fndtfr__WalletTransfer__sc_col_321_li'
+    }
+
     wallet_wing_id = 'fndtfr__WalletTransfer__sc_col_316_li'
     wallet_pipay_id = 'fndtfr__WalletTransfer__sc_col_317_li'
     wallet_true_money_id = 'fndtfr__WalletTransfer__sc_col_319_li'
@@ -11,6 +22,7 @@ class WalletTransferPage:
     wallet_emoney_id = 'fndtfr__WalletTransfer__sc_col_322_li'
     wallet_visa_direct_id = 'fndtfr__WalletTransfer__sc_col_323_li'
     wallet_local_bank_via_bakong_id = 'fndtfr__WalletTransfer__sc_col_321_li'
+
 
     ## Select Account
     selectAccount_KHR_id = 'inblpy__InstantBillPayment__container_list_2_row_0'
@@ -57,3 +69,6 @@ class WalletTransferPage:
 
     def selectKHRaccount(self):
         self.driver.find_element(By.ID, self.selectAccount_KHR_id).click()
+
+    def selectAWallet(self, wallet):
+        self.driver.find_element(By.ID, self.all_wallet_type[wallet]).click()
