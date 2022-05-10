@@ -20,7 +20,7 @@ class Test_002_DataDriven_Login:
         self.hp = HomePage(self.driver)
 
         self.driver.get(self.baseURL)
-        sleep(5)
+        sleep(3)
 
         self.rows = XLUtils.getRowCount(self.path, 'Sheet2')
         print("Number of Rows: ", self.rows)

@@ -23,7 +23,7 @@ class Test_004_Electric:
         print("Start test 003")
         self.driver = setup
         self.driver.get(self.baseURL)
-        sleep(5)
+        sleep(3)
 
         self.lp = LoginPage(self.driver)
 
@@ -32,18 +32,15 @@ class Test_004_Electric:
         self.lp.setUserID(self.userID)
         self.lp.setPassword(self.password)
         self.lp.clickLogin()
-        self.otp = input("OTP: ")
-        self.lp.setOtp(self.otp)
+        self.lp.setOtp()
 
         self.menu = Menu(self.driver)
         self.bill = BillPaymentPage(self.driver)
 
         ## menu
         self.menu.clickMenu()
-        sleep(1)
         self.menu.click_payment_button()
         self.menu.click_payment_under_payment()
-        sleep(1)
 
         self.rows = XLUtils.getRowCount(self.path, 'Electric')
 

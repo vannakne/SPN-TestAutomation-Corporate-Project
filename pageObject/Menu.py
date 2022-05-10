@@ -30,6 +30,7 @@ class Menu:
 
     def clickMenu(self):
         self.driver.find_element(By.ID, self.button_menu_id).click()
+        sleep(0.3)
 
     def click_closeMenu_button(self):
         self.driver.find_element(By.ID, self.button_closeMenu_id).click()
@@ -45,6 +46,7 @@ class Menu:
 
     def click_payment_under_payment(self):
         self.driver.find_element(By.ID, self.button_payment_under_payment_id).click()
+        sleep(0.3)
 
     def click_transfer_button(self):
         self.driver.find_element(By.ID, self.button_transfer_id).click()

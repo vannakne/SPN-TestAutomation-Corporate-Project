@@ -23,7 +23,7 @@ class Test_002_DataDriven_Login:
             self.hp = HomePage(self.driver)
 
             self.driver.get(self.baseURL)
-            sleep(8)
+            sleep(2)
 
             self.rows = XLUtils.getRowCount(self.path, 'Sheet2')
             for r in range(2, self.rows+1):
@@ -38,6 +38,7 @@ class Test_002_DataDriven_Login:
                     self.lp.setPassword(self.password)
                     self.lp.clickLogin()
                     sleep(1)
+                    self.lp.setOtp()
             i = input(":")
             if i == '':
                 continue

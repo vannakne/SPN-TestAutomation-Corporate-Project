@@ -10,6 +10,7 @@ class LoginPage:
     button_login_id = 'clogin__FirstLaunch__PL_loginBtn'
     linktext_forgotPassword_id = 'clogin__FirstLaunch__forglbl_txtcnt'
 
+    text_opt_id = 'clogin__FirstLaunch__lbltxtotp'
     message_otp_class = 'msg'
     button_otpOk_class = 'ok'
     button_wrongCredentialOk_class = 'ok'
@@ -38,17 +39,18 @@ class LoginPage:
 
     def clickLogin(self):
         self.driver.find_element(By.ID, self.button_login_id).click()
-        sleep(3)
+        sleep(1)
 
     def getOtpMessage(self):
         otpMessage = self.driver.find_element(By.CLASS_NAME, self.message_otp_class).text
         return otpMessage
 
-    def setOtp(self, otp):
+    def setOtp(self):
         self.driver.find_element(By.CLASS_NAME, self.button_otpOk_class).click()
-        self.driver.find_element(By.ID, self.textbox_otp_id).send_keys(otp)
+        self.otp = self.driver.find_element(By.ID, self.text_opt_id).text
+        self.driver.find_element(By.ID, self.textbox_otp_id).send_keys(self.otp)
         self.driver.find_element(By.ID, self.button_confirmOtp_id).click()
-        sleep(5)
+        sleep(2)
 
     def OkAndCancelOtp(self):
         self.driver.find_element(By.CLASS_NAME, self.button_otpOk_class).click()
