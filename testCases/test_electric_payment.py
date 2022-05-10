@@ -106,10 +106,8 @@ class Test_004_Electric:
                     sleep(2)
                     ## menu
                     self.menu.clickMenu()
-                    sleep(1)
                     self.menu.click_payment_button()
                     self.menu.click_payment_under_payment()
-                    sleep(1)
                     self.bill.clickElectricity()
                     self.bill.selectUSDaccount()
                 else:
