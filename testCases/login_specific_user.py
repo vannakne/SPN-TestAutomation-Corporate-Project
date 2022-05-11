@@ -23,7 +23,7 @@ class Test_002_DataDriven_Login:
             self.hp = HomePage(self.driver)
 
             self.driver.get(self.baseURL)
-            sleep(2)
+            sleep(4)
 
             self.rows = XLUtils.getRowCount(self.path, 'Sheet2')
             for r in range(2, self.rows+1):

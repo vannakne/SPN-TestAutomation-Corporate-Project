@@ -31,6 +31,8 @@ class WalletTransferPage:
     ## Wallet Transfer Input Screen
     textbox_consumer_number_id = 'fndtfr__WalletTransfer__consno'
     textbox_amount_id = 'fndtfr__WalletTransfer__amt'
+    text_amount_ccy_id = 'fndtfr__WalletTransfer__currdpd'
+    textbox_remark_id = 'fndtfr__WalletTransfer__rmrk'
 
     button_dropDown_currency_id = 'fndtfr__WalletTransfer__currdpd_span'
     currency_USD_id = 'fndtfr__WalletTransfer__currdpd_option_USD'
@@ -38,6 +40,13 @@ class WalletTransferPage:
 
     button_pay_id = 'fndtfr__WalletTransfer__el_btn_2'
 
+    button_confirm_id = 'fndtfr__WalletTransfer__el_btn_5'
+    textbox_Tpin_id = 'fndtfr__WalletTransfer__tpininp'
+    button_submit_tpin_id = 'fndtfr__WalletTransfer__el_btn_13'
+    linkTest_makerAnotherTrf_id = 'fndtfr__WalletTransfer__el_hpl_12_txtcnt'
+
+    message_error_message_class = 'msg'
+    button_ok_class = 'ok'
 
 
     def __init__(self, driver):
@@ -70,5 +79,41 @@ class WalletTransferPage:
     def selectKHRaccount(self):
         self.driver.find_element(By.ID, self.selectAccount_KHR_id).click()
 
-    def selectAWallet(self, wallet):
+    def choose_a_Wallet_type(self, wallet):
         self.driver.find_element(By.ID, self.all_wallet_type[wallet]).click()
+
+    def enter_consumer_number(self, acc_number):
+        self.driver.find_element(By.ID, self.textbox_consumer_number_id).send_keys(acc_number)
+
+    def enter_Amount(self, amount):
+        self.driver.find_element(By.ID, self.textbox_amount_id).send_keys(amount)
+
+    def clickRemark(self):
+        self.driver.find_element(By.ID, self.textbox_remark_id).click()
+
+    def clickPay(self):
+        self.driver.find_element(By.ID, self.button_pay_id).click()
+
+    def getAmountCCY(self):
+        self.currency = self.driver.find_element(By.ID, self.text_amount_ccy_id).text
+        return self.currency
+
+    def clickConfirm(self):
+        self.driver.find_element(By.ID, self.button_confirm_id).click()
+
+    def enter_Tpin(self, tpin):
+        self.driver.find_element(By.ID, self.textbox_Tpin_id).send_keys(tpin)
+
+    def clickSubmit(self):
+        self.driver.find_element(By.ID, self.button_submit_tpin_id).click()
+
+    def clickAnotherTrf(self):
+        self.driver.find_element(By.ID, self.linkTest_makerAnotherTrf_id).click()
+
+    def getPopUpMessage(self):
+        self.msg = self.driver.find_element(By.CLASS_NAME, self.message_error_message_class).text
+        return self.msg
+
+    def clickOK(self):
+        self.driver.find_element(By.CLASS_NAME, self.button_ok_class).click()
+

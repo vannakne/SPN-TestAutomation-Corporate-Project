@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 
 class BillPaymentPage:
 
+    img_SPN_logo_id = 'crpusr__BasePage__homebtn'
+
     ## Bill Type
     button_electricity_id = 'inblpy__InstantBillPayment__ct_lst_1_row_0'
     button_water_supply_id = 'inblpy__InstantBillPayment__ct_lst_1_row_1'
@@ -16,7 +18,18 @@ class BillPaymentPage:
     button_financial_service_id = 'inblpy__InstantBillPayment__ct_lst_1_row_9'
     button_general_bills_id = 'inblpy__InstantBillPayment__ct_lst_1_row_10'
 
-    ##
+    # all bill type
+    all_bill_type = {
+        'Electricity': 'inblpy__InstantBillPayment__ct_lst_1_row_0',
+        'Water Supply': 'inblpy__InstantBillPayment__ct_lst_1_row_1',
+        'Waste': 'inblpy__InstantBillPayment__ct_lst_1_row_2',
+        'Education': 'inblpy__InstantBillPayment__ct_lst_1_row_3',
+        'Real Estate': 'inblpy__InstantBillPayment__ct_lst_1_row_8',
+        'Internet': 'inblpy__InstantBillPayment__ct_lst_1_row_4',
+        'Insurance': 'inblpy__InstantBillPayment__ct_lst_1_row_5',
+        'Financial Service': 'inblpy__InstantBillPayment__ct_lst_1_row_9',
+        'General Bill': 'inblpy__InstantBillPayment__ct_lst_1_row_10',
+    }
 
     ## Select Account
     selectAccount_KHR_id = 'inblpy__InstantBillPayment__container_list_2_row_0'
@@ -53,19 +66,19 @@ class BillPaymentPage:
         'EDC Kampong Cham': 'inblpy__InstantBillPayment__bilsel_option_EDC Kampong Cham',
         'EDC Ratanakiri': 'inblpy__InstantBillPayment__bilsel_option_EDC Ratanakiri',
         'EDC Siem Reap': 'inblpy__InstantBillPayment__bilsel_option_EDC Siem Reap',
-        'Electricite Du Cambodge (Phnom Penh)': 'inblpy__InstantBillPayment__bilsel_option_Electricite Du Cambodge (Phnom Penh)'
+        'Electricite Du Cambodge (Phnom Penh)': 'inblpy__InstantBillPayment__bilsel_option_Electricite Du Cambodge (Phnom Penh)',
     }
 
     ## Real Estate
     all_biller_real_estate_id = {
         'Borey Leng Navatra': 'inblpy__InstantBillPayment__bilsel_option_Borey Leng Navatra',
-        'Borey Peng Huoth': 'inblpy__InstantBillPayment__bilsel_option_Borey Peng Huoth'
+        'Borey Peng Huoth': 'inblpy__InstantBillPayment__bilsel_option_Borey Peng Huoth',
     }
 
     ## Education
     all_biller_education_id = {
         'National University of Management': 'inblpy__InstantBillPayment__bilsel_option_National University of Management',
-        'Western International School Plc': 'inblpy__InstantBillPayment__bilsel_option_Western International School Plc'
+        'Western International School Plc': 'inblpy__InstantBillPayment__bilsel_option_Western International School Plc',
     }
 
     ## Water Supply
@@ -73,13 +86,13 @@ class BillPaymentPage:
         'Chamkar Leu Water Supply': 'inblpy__InstantBillPayment__bilsel_option_Chamkar Leu Water Supply',
         'Phnom Penh Water Supply': 'inblpy__InstantBillPayment__bilsel_option_Phnom Penh Water Supply',
         'Siem Reap Water Supply Authority': 'inblpy__InstantBillPayment__bilsel_option_Siem Reap Water Supply Authority',
-        'Traeng Water Supply': 'inblpy__InstantBillPayment__bilsel_option_Traeng Water Supply'
+        'Traeng Water Supply': 'inblpy__InstantBillPayment__bilsel_option_Traeng Water Supply',
     }
 
     ## Internet
     all_biller_internet_id = {
         'MekongNet ISP': 'inblpy__InstantBillPayment__bilsel_option_MekongNet ISP',
-        'Telecom Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Telecom Cambodia'
+        'Telecom Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Telecom Cambodia',
     }
 
     ## Insurance
@@ -87,21 +100,81 @@ class BillPaymentPage:
         'AIA CAMBODIA': 'inblpy__InstantBillPayment__bilsel_option_AIA CAMBODIA',
         'Manulife Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Manulife Cambodia',
         'Mekong Microinsurance': 'inblpy__InstantBillPayment__bilsel_option_Mekong Microinsurance',
-        'Prudential Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Prudential Cambodia'
+        'Prudential Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Prudential Cambodia',
     }
 
     ## Financial Service
     all_biller_financial_service_id = {
-        'Cambodian Labor Care': 'inblpy__InstantBillPayment__bilsel_option_Cambodian Labor Care'
+        'Cambodian Labor Care': 'inblpy__InstantBillPayment__bilsel_option_Cambodian Labor Care',
     }
 
     ## General Bills
     all_biller_general_bills_id = {
-        'Banh Ji': 'inblpy__InstantBillPayment__bilsel_option_Banh Ji'
+        'Banh Ji': 'inblpy__InstantBillPayment__bilsel_option_Banh Ji',
+    }
+
+    ## Waste
+    all_biller_waste_id = {
+        'GAEA Waste Management': 'inblpy__InstantBillPayment__bilsel_option_GAEA Waste Management',
+        'Song Kimla Solid Waste Ang Snuol': 'inblpy__InstantBillPayment__bilsel_option_Song Kimla Solid Waste Ang Snuol',
+        'Phnom Penh Solid Waste Management Authority': 'inblpy__InstantBillPayment__bilsel_option_Phnom Penh Solid Waste Management Authority',
+        'Viphou Phopudh Utility': 'inblpy__InstantBillPayment__bilsel_option_Viphou Phopudh Utility',
+    }
+
+    # biller for each bill
+    biller_dic = {
+        # Electricity
+        'Electric Khum O': 'inblpy__InstantBillPayment__bilsel_option_Electric Khum O',
+        'Kok Tieng L Y P Group Co.ltd (OMC)': 'inblpy__InstantBillPayment__bilsel_option_Kok Tieng L Y P Group Co.ltd (OMC)',
+        'Plork Vannak Electricity': 'inblpy__InstantBillPayment__bilsel_option_Plork Vannak Electricity',
+        'Tnalbek Chamcarleu Electricity': 'inblpy__InstantBillPayment__bilsel_option_Tnalbek Chamcarleu Electricity',
+        'EDC Kampong Cham': 'inblpy__InstantBillPayment__bilsel_option_EDC Kampong Cham',
+        'EDC Ratanakiri': 'inblpy__InstantBillPayment__bilsel_option_EDC Ratanakiri',
+        'EDC Siem Reap': 'inblpy__InstantBillPayment__bilsel_option_EDC Siem Reap',
+        'Electricite Du Cambodge (Phnom Penh)': 'inblpy__InstantBillPayment__bilsel_option_Electricite Du Cambodge (Phnom Penh)',
+
+        # Real Estate
+        'Borey Leng Navatra': 'inblpy__InstantBillPayment__bilsel_option_Borey Leng Navatra',
+        'Borey Peng Huoth': 'inblpy__InstantBillPayment__bilsel_option_Borey Peng Huoth',
+
+        # Education
+        'National University of Management': 'inblpy__InstantBillPayment__bilsel_option_National University of Management',
+        'Western International School Plc': 'inblpy__InstantBillPayment__bilsel_option_Western International School Plc',
+
+        # Water Supply
+        'Chamkar Leu Water Supply': 'inblpy__InstantBillPayment__bilsel_option_Chamkar Leu Water Supply',
+        'Phnom Penh Water Supply': 'inblpy__InstantBillPayment__bilsel_option_Phnom Penh Water Supply',
+        'Siem Reap Water Supply Authority': 'inblpy__InstantBillPayment__bilsel_option_Siem Reap Water Supply Authority',
+        'Traeng Water Supply': 'inblpy__InstantBillPayment__bilsel_option_Traeng Water Supply',
+
+        # Internet
+        'MekongNet ISP': 'inblpy__InstantBillPayment__bilsel_option_MekongNet ISP',
+        'Telecom Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Telecom Cambodia',
+
+        # Insurance
+        'AIA CAMBODIA': 'inblpy__InstantBillPayment__bilsel_option_AIA CAMBODIA',
+        'Manulife Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Manulife Cambodia',
+        'Mekong Microinsurance': 'inblpy__InstantBillPayment__bilsel_option_Mekong Microinsurance',
+        'Prudential Cambodia': 'inblpy__InstantBillPayment__bilsel_option_Prudential Cambodia',
+
+        # Financial Service
+        'Cambodian Labor Care': 'inblpy__InstantBillPayment__bilsel_option_Cambodian Labor Care',
+
+        # General Bill
+        'Banh Ji': 'inblpy__InstantBillPayment__bilsel_option_Banh Ji',
+
+        # Waste
+        'GAEA Waste Management': 'inblpy__InstantBillPayment__bilsel_option_GAEA Waste Management',
+        'Song Kimla Solid Waste Ang Snuol': 'inblpy__InstantBillPayment__bilsel_option_Song Kimla Solid Waste Ang Snuol',
+        'Phnom Penh Solid Waste Management Authority': 'inblpy__InstantBillPayment__bilsel_option_Phnom Penh Solid Waste Management Authority',
+        'Viphou Phopudh Utility': 'inblpy__InstantBillPayment__bilsel_option_Viphou Phopudh Utility',
     }
 
     def __init__(self, driver):
         self.driver = driver
+
+    def click_SPN_Logo(self):
+        self.driver.find_element(By.ID, self.img_SPN_logo_id).click()
 
     def clickElectricity(self):
         self.driver.find_element(By.ID, self.button_electricity_id).click()
@@ -226,3 +299,9 @@ class BillPaymentPage:
     def getAmountCurrency(self):
         self.currency = self.driver.find_element(By.ID, self.currencybox_currency_id).get_attribute('value')
         return self.currency
+
+    def choose_a_bill_type(self, type):
+        self.driver.find_element(By.ID, self.all_bill_type[type]).click()
+
+    def choose_a_biller(self, biller):
+        self.driver.find_element(By.ID, self.biller_dic[biller]).click()
