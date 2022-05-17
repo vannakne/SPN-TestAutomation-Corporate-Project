@@ -61,17 +61,17 @@ class ReadConfig_Wallet:
         return url
 
     @staticmethod
-    def getBillWalletCorpID():
+    def getWalletCorpID():
         corpID = config.get('Wallet Transfer login info', 'corporateId_bill')
         return corpID
 
     @staticmethod
-    def getBillWalletUserID():
+    def getWalletUserID():
         userID = config.get("Wallet Transfer login info", "userId_bill")
         return userID
 
     @staticmethod
-    def getBillWalletPassword():
+    def getWalletPassword():
         password = config.get("Wallet Transfer login info", "password_bill")
         return password
 

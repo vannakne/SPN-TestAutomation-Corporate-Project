@@ -10,7 +10,8 @@ from utilities.readProperty import ReadConfig_Wallet
 from pageObject.Menu import Menu
 from pageObject.BillPaymentPage import BillPaymentPage
 
-class Test_010_Wallet:
+
+class Test_010_Pipay:
     baseURL = ReadConfig_Wallet.getApplicationURL()
     corpID = ReadConfig_Wallet.getWalletCorpID()
     userID = ReadConfig_Wallet.getWalletUserID()
@@ -22,10 +23,10 @@ class Test_010_Wallet:
     result_passed = []
     result_failed = []
 
-    def test_010_Wallet(self, setup):
+    def test_012_Pipay(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
-        sleep(3)
+        sleep(4)
 
         self.lp = LoginPage(self.driver)
 
@@ -39,30 +40,36 @@ class Test_010_Wallet:
         self.menu = Menu(self.driver)
         self.wallet = WalletTransferPage(self.driver)
         self.bill = BillPaymentPage(self.driver)
-        
-        self.rows = XLUtils.getRowCount(self.path, 'All Wallet')
-        for r in range(2, self.rows+1):
+
+        self.rows = XLUtils.getRowCount(self.path, 'Pipay')
+        for r in range(2, self.rows + 1):
             ## menu
             self.menu.clickMenu()
             self.menu.click_wallet_and_card_Transfer_button()
 
-            self.WalletType = XLUtils.readData(self.path, 'All Wallet', r, 1)
+            # self.WalletType = XLUtils.readData(self.path, 'Pipay', r, 1)
 
             ## Choose a Wallet type
-            self.wallet.choose_a_Wallet_type(self.WalletType)
+            self.wallet.clickPipay()
             self.wallet.selectUSDaccount()
 
-            self.conusmerNum = XLUtils.readData(self.path, 'All Wallet', r, 2)
+            self.conusmerNum = XLUtils.readData(self.path, 'Pipay', r, 2)
             self.wallet.enter_consumer_number(self.conusmerNum)
-
+            print(self.conusmerNum)
+            self.wallet.clickRemark()
+            sleep(1)
             self.amount_ccy = self.wallet.getAmountCCY()
+            print("CURRENCY ", self.amount_ccy)
 
             if self.amount_ccy == 'USD':
+                self.wallet.click_Amount()
                 self.wallet.enter_Amount('1')
+                sleep(1)
             elif self.amount_ccy == 'KHR':
                 self.wallet.enter_Amount('4000')
+                sleep(1)
             self.wallet.clickRemark()
-            sleep(0.1)
+            sleep(0.5)
             self.wallet.clickPay()
             self.log.info("Pay button clicked.")
             sleep(1)
@@ -74,13 +81,13 @@ class Test_010_Wallet:
                 self.wallet.clickSubmit()
                 print(colored("Submit TPIN Clicked", 'red'))
                 sleep(3)
-                self.bill.click_SPN_Logo()
+                self.wallet.clickAnotherTrf()
                 print(colored("Make Another Transfer clicked", 'red'))
-                self.log.info("***************Test %s***************", self.WalletType)
+                # self.log.info("***************Test %s***************", self.WalletType)
                 print()
-                print(self.WalletType)
+                # print(self.WalletType)
                 print(colored("============================================", 'green'))
-                print(colored(self.WalletType, 'green'))
+                # print(colored(self.WalletType, 'green'))
                 print(colored(self.conusmerNum, 'green'))
                 print(colored("==> Passed", 'green'))
                 print(colored("============================================", 'green'))
@@ -90,11 +97,11 @@ class Test_010_Wallet:
             except:
                 self.message = self.wallet.getPopUpMessage()
                 print()
-                print(self.WalletType)
+                # print(self.WalletType)
                 print(colored("============================================", 'red'))
-                print(colored(self.WalletType, 'yellow'))
+                # print(colored(self.WalletType, 'yellow'))
                 print(colored(self.conusmerNum, 'yellow'))
-                print('Message: ', '\"'+self.message+'\"')
+                print('Message: ', '\"' + self.message + '\"')
                 print(colored("==> Failed", 'red'))
                 print(colored("============================================", 'red'))
                 self.result_failed.append("Failed")

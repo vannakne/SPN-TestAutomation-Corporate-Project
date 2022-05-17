@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver.common.by import By
 
 class WalletTransferPage:
@@ -15,7 +17,7 @@ class WalletTransferPage:
     }
 
     wallet_wing_id = 'fndtfr__WalletTransfer__sc_col_316_li'
-    wallet_pipay_id = 'fndtfr__WalletTransfer__sc_col_317_li'
+    wallet_pipay_id = 'fndtfr__WalletTransfer__sc_col_313_li'
     wallet_true_money_id = 'fndtfr__WalletTransfer__sc_col_319_li'
     wallet_bakong_id = 'fndtfr__WalletTransfer__sc_col_314_li'
     wallet_lyhour_veyluy_id = 'fndtfr__WalletTransfer__sc_col_320_li'
@@ -25,8 +27,8 @@ class WalletTransferPage:
 
 
     ## Select Account
-    selectAccount_KHR_id = 'inblpy__InstantBillPayment__container_list_2_row_0'
-    selectAccount_USD_id = 'inblpy__InstantBillPayment__container_list_2_row_1'
+    selectAccount_KHR_id = 'fndtfr__WalletTransfer__container_list_2_row_0'
+    selectAccount_USD_id = 'fndtfr__WalletTransfer__container_list_2_row_1'
 
     ## Wallet Transfer Input Screen
     textbox_consumer_number_id = 'fndtfr__WalletTransfer__consno'
@@ -48,7 +50,6 @@ class WalletTransferPage:
     message_error_message_class = 'msg'
     button_ok_class = 'ok'
 
-
     def __init__(self, driver):
         self.driver = driver
 
@@ -57,6 +58,7 @@ class WalletTransferPage:
 
     def clickPipay(self):
         self.driver.find_element(By.ID, self.wallet_pipay_id).click()
+        sleep(1)
 
     def clickTrueMoney(self):
         self.driver.find_element(By.ID, self.wallet_true_money_id).click()
@@ -88,6 +90,9 @@ class WalletTransferPage:
     def enter_Amount(self, amount):
         self.driver.find_element(By.ID, self.textbox_amount_id).send_keys(amount)
 
+    def click_Amount(self):
+        self.driver.find_element(By.ID, self.textbox_amount_id).click()
+
     def clickRemark(self):
         self.driver.find_element(By.ID, self.textbox_remark_id).click()
 
@@ -95,7 +100,7 @@ class WalletTransferPage:
         self.driver.find_element(By.ID, self.button_pay_id).click()
 
     def getAmountCCY(self):
-        self.currency = self.driver.find_element(By.ID, self.text_amount_ccy_id).text
+        self.currency = self.driver.find_element(By.ID, self.text_amount_ccy_id).get_attribute('value')
         return self.currency
 
     def clickConfirm(self):

@@ -7,7 +7,7 @@ from utilities import XLUtils
 from utilities.customLogger import LogGen
 from termcolor import colored
 
-class Test_004_Electric:
+class Test_011_Payment:
     baseURL = ReadConfig_bill.getApplicationURL()
     corpID = ReadConfig_bill.getBillPaymentCorpID()
     userID = ReadConfig_bill.getBillPaymentUserID()
@@ -20,7 +20,7 @@ class Test_004_Electric:
     result_failed = []
 
     def test_011_Payment(self, setup):
-        print("Start test 005")
+        print("Start test 011")
         self.driver = setup
         self.driver.get(self.baseURL)
         sleep(3)
@@ -80,7 +80,7 @@ class Test_004_Electric:
                 self.bill.clickSubmitTpin()
                 print(colored("Submit TPIN Clicked", 'red'))
                 sleep(3)
-                self.bill.clickMakeAnotherTrf()
+                self.bill.click_SPN_Logo()
                 print(colored("Make Another Transfer clicked", 'red'))
                 self.log.info("***************Test %s***************", self.billType)
                 print()

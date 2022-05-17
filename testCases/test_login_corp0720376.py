@@ -22,16 +22,16 @@ class Test_002_DataDriven_Login:
         self.driver.get(self.baseURL)
         sleep(3)
 
-        self.rows = XLUtils.getRowCount(self.path, 'Sheet2')
+        self.rows = XLUtils.getRowCount(self.path, 'Temp')
         print("Number of Rows: ", self.rows)
 
         self.result_status = []
 
         for r in range(2, self.rows+1):
-            self.corporateId = XLUtils.readData(self.path, 'Sheet2', r, 1)
-            self.userId = XLUtils.readData(self.path, 'Sheet2', r, 2)
-            self.password = XLUtils.readData(self.path, 'Sheet2', r, 3)
-            # self.exp = XLUtils.readData(self.path, 'Sheet2', r, 4)
+            self.corporateId = XLUtils.readData(self.path, 'Temp', r, 1)
+            self.userId = XLUtils.readData(self.path, 'Temp', r, 2)
+            self.password = XLUtils.readData(self.path, 'Temp', r, 3)
+            # self.exp = XLUtils.readData(self.path, 'Temp', r, 4)
             self.lp.setCorpoateID(self.corporateId)
             self.lp.setUserID(self.userId)
             self.lp.setPassword(self.password)

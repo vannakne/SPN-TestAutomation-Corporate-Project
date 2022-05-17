@@ -53,12 +53,15 @@ class Menu:
 
     def click_wallet_and_card_Transfer_button(self):
         self.driver.find_element(By.ID, self.button_wallet_and_card_Transfer_id).click()
+        sleep(1.5)
 
     def click_mobile_topUp_button(self):
         self.driver.find_element(By.ID, self.button_mobile_topUp_id).click()
+        sleep(0.3)
 
     def click_sending_instructions_button(self):
         self.driver.find_element(By.ID, self.button_sending_instructions_id).click()
+        sleep(0.3)
 
     def scrollDown(self):
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
@@ -67,10 +70,12 @@ class Menu:
     def click_services_button(self):
         self.scrollDown()
         self.driver.find_element(By.ID, self.button_services_id).click()
+        sleep(0.3)
 
     def click_retail_pay_button(self):
         self.scrollDown()
         self.driver.find_element(By.ID, self.button_retail_pay_id).click()
+        sleep(0.3)
 
     def click_CBCHealth_check_button(self):
         self.scrollDown()

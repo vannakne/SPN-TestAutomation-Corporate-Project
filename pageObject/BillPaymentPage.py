@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 class BillPaymentPage:
 
     img_SPN_logo_id = 'crpusr__BasePage__homebtn'
+    img_SPN_logo2_id = 'crpusr__BasePage__el_btn_5'
 
     ## Bill Type
     button_electricity_id = 'inblpy__InstantBillPayment__ct_lst_1_row_0'
@@ -174,7 +175,10 @@ class BillPaymentPage:
         self.driver = driver
 
     def click_SPN_Logo(self):
-        self.driver.find_element(By.ID, self.img_SPN_logo_id).click()
+        try:
+            self.driver.find_element(By.ID, self.img_SPN_logo_id).click()
+        except:
+            self.driver.find_element(By.ID, self.img_SPN_logo2_id).click()
 
     def clickElectricity(self):
         self.driver.find_element(By.ID, self.button_electricity_id).click()
