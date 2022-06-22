@@ -12,9 +12,9 @@ class BillPaymentPage:
     button_electricity_id = 'inblpy__InstantBillPayment__ct_lst_1_row_0'
     button_water_supply_id = 'inblpy__InstantBillPayment__ct_lst_1_row_1'
     button_waste_id = 'inblpy__InstantBillPayment__ct_lst_1_row_2'
-    button_education_id = 'inblpy__InstantBillPayment__ct_lst_1_row_3'
+    button_education_id = 'inblpy__InstantBillPayment__ct_lst_1_row_4'
     button_real_estate_id = 'inblpy__InstantBillPayment__ct_lst_1_row_8'
-    button_internet_id = 'inblpy__InstantBillPayment__ct_lst_1_row_4'
+    button_internet_id = 'inblpy__InstantBillPayment__ct_lst_1_row_3'
     button_insurance_id = 'inblpy__InstantBillPayment__ct_lst_1_row_5'
     button_financial_service_id = 'inblpy__InstantBillPayment__ct_lst_1_row_9'
     button_general_bills_id = 'inblpy__InstantBillPayment__ct_lst_1_row_10'
@@ -24,12 +24,13 @@ class BillPaymentPage:
         'Electricity': 'inblpy__InstantBillPayment__ct_lst_1_row_0',
         'Water Supply': 'inblpy__InstantBillPayment__ct_lst_1_row_1',
         'Waste': 'inblpy__InstantBillPayment__ct_lst_1_row_2',
-        'Education': 'inblpy__InstantBillPayment__ct_lst_1_row_3',
+        'Education': 'inblpy__InstantBillPayment__ct_lst_1_row_4',
         'Real Estate': 'inblpy__InstantBillPayment__ct_lst_1_row_8',
-        'Internet': 'inblpy__InstantBillPayment__ct_lst_1_row_4',
+        'Internet': 'inblpy__InstantBillPayment__ct_lst_1_row_3',
         'Insurance': 'inblpy__InstantBillPayment__ct_lst_1_row_5',
         'Financial Service': 'inblpy__InstantBillPayment__ct_lst_1_row_9',
         'General Bill': 'inblpy__InstantBillPayment__ct_lst_1_row_10',
+        'Trading': 'inblpy__InstantBillPayment__ct_lst_1_row_6',
     }
 
     ## Select Account
@@ -52,17 +53,28 @@ class BillPaymentPage:
     button_ok_class = 'ok'
     text_confirmationPage_id = 'inblpy__InstantBillPayment__el_txt_18_txtcnt'
 
+    text_feecharge_input_screen_id = 'inblpy__InstantBillPayment__feetxt'
+
     ## confirm page
     button_confirm_id = 'inblpy__InstantBillPayment__el_btn_5'
     textbox_Tpin_id = 'inblpy__InstantBillPayment__tpininp'
     button_submit_tpin_id = 'inblpy__InstantBillPayment__el_btn_13'
     linkText_Make_another_transfer_id = 'inblpy__InstantBillPayment__el_hpl_12_txtcnt'
 
+    text_from_acc_id = 'inblpy__InstantBillPayment__blncecnf'
+    text_acc_balance_id = 'inblpy__InstantBillPayment__blncecnf'
+
+    text_trf_amount_id = 'inblpy__InstantBillPayment__amtcnf'
+    text_fee_charge_id = 'inblpy__InstantBillPayment__feecnf'
+
+    text_converted_value_id = 'inblpy__InstantBillPayment__cnvvalcnf'
+    text_exchange_rate_id = 'inblpy__InstantBillPayment__cnvratevalcnf'
+
     ## Electricity
     all_biller_electric_id = {
         'Electric Khum O': 'inblpy__InstantBillPayment__bilsel_option_Electric Khum O',
         'Kok Tieng L Y P Group Co.ltd (OMC)': 'inblpy__InstantBillPayment__bilsel_option_Kok Tieng L Y P Group Co.ltd (OMC)',
-        'Plork Vannak Electricity': 'inblpy__InstantBillPayment__bilsel_option_Plork Vannak Electricity',
+        'Plork Vannak Electricity': 'inblpy__InstantBillPayment__bilsel_option_Plork Vannak Electricity ',
         'Tnalbek Chamcarleu Electricity': 'inblpy__InstantBillPayment__bilsel_option_Tnalbek Chamcarleu Electricity',
         'EDC Kampong Cham': 'inblpy__InstantBillPayment__bilsel_option_EDC Kampong Cham',
         'EDC Ratanakiri': 'inblpy__InstantBillPayment__bilsel_option_EDC Ratanakiri',
@@ -70,7 +82,7 @@ class BillPaymentPage:
         'Electricite Du Cambodge (Phnom Penh)': 'inblpy__InstantBillPayment__bilsel_option_Electricite Du Cambodge (Phnom Penh)',
     }
 
-    ## Real Estate
+    ## Real Estatep
     all_biller_real_estate_id = {
         'Borey Leng Navatra': 'inblpy__InstantBillPayment__bilsel_option_Borey Leng Navatra',
         'Borey Peng Huoth': 'inblpy__InstantBillPayment__bilsel_option_Borey Peng Huoth',
@@ -122,12 +134,17 @@ class BillPaymentPage:
         'Viphou Phopudh Utility': 'inblpy__InstantBillPayment__bilsel_option_Viphou Phopudh Utility',
     }
 
+    # Trading
+    all_biller_trading_id = {
+    'GREENFEED (Cambodia) Co., Ltd.': 'inblpy__InstantBillPayment__bilsel_option_GREENFEED (Cambodia) Co., Ltd.'
+    }
+
     # biller for each bill
     biller_dic = {
         # Electricity
         'Electric Khum O': 'inblpy__InstantBillPayment__bilsel_option_Electric Khum O',
         'Kok Tieng L Y P Group Co.ltd (OMC)': 'inblpy__InstantBillPayment__bilsel_option_Kok Tieng L Y P Group Co.ltd (OMC)',
-        'Plork Vannak Electricity': 'inblpy__InstantBillPayment__bilsel_option_Plork Vannak Electricity',
+        'Plork Vannak Electricity': 'inblpy__InstantBillPayment__bilsel_option_Plork Vannak Electricity ',
         'Tnalbek Chamcarleu Electricity': 'inblpy__InstantBillPayment__bilsel_option_Tnalbek Chamcarleu Electricity',
         'EDC Kampong Cham': 'inblpy__InstantBillPayment__bilsel_option_EDC Kampong Cham',
         'EDC Ratanakiri': 'inblpy__InstantBillPayment__bilsel_option_EDC Ratanakiri',
@@ -169,6 +186,9 @@ class BillPaymentPage:
         'Song Kimla Solid Waste Ang Snuol': 'inblpy__InstantBillPayment__bilsel_option_Song Kimla Solid Waste Ang Snuol',
         'Phnom Penh Solid Waste Management Authority': 'inblpy__InstantBillPayment__bilsel_option_Phnom Penh Solid Waste Management Authority',
         'Viphou Phopudh Utility': 'inblpy__InstantBillPayment__bilsel_option_Viphou Phopudh Utility',
+
+        # Trading
+        'GREENFEED (Cambodia) Co., Ltd.': 'inblpy__InstantBillPayment__bilsel_option_GREENFEED (Cambodia) Co., Ltd.'
     }
 
     def __init__(self, driver):
@@ -309,3 +329,51 @@ class BillPaymentPage:
 
     def choose_a_biller(self, biller):
         self.driver.find_element(By.ID, self.biller_dic[biller]).click()
+
+    def get_acc_balance_b4_txn(self):
+        balance = self.driver.find_element(By.ID, self.text_acc_balance_id).text
+        balance = balance.replace('USD', '')
+        balance = balance.replace(',', '')
+        return float(balance)
+
+    def get_converted_value(self):
+        try:
+            balance = self.driver.find_element(By.ID, self.text_converted_value_id).text
+            balance = balance.replace(',', '')
+            balance = balance.replace('USD', '')
+            balance = balance.replace('KHR', '')
+            return float(balance)
+        except:
+            return 0
+
+    def get_trf_amount(self):
+        balance = self.driver.find_element(By.ID, self.text_trf_amount_id).text
+        balance = balance.replace(',', '')
+        balance = balance.replace('USD', '')
+        balance = balance.replace('KHR', '')
+        return float(balance)
+
+    def get_fee_charge(self):
+        try:
+            balance = self.driver.find_element(By.ID, self.text_fee_charge_id).text
+            balance = balance.replace('USD', '')
+            balance = balance.replace('KHR', '')
+            balance = balance.replace(',', '')
+            return float(balance)
+        except:
+            return 0
+
+    def get_exchange_rate(self):
+        try:
+            rate = self.driver.find_element(By.ID, self.text_exchange_rate_id).text
+            splitRate = rate.split("=")
+            KHRValue = splitRate[-1]
+            KHRValue = KHRValue.replace("KHR", '')
+            KHRValue = KHRValue.replace(",", '')
+            return float(KHRValue)
+        except:
+            return 0
+
+    def get_feecharge_input_screen(self):
+        text_fee = self.driver.find_element(By.ID, self.text_feecharge_input_screen_id).text
+        return text_fee

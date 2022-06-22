@@ -15,7 +15,7 @@ class Test_011_Payment:
     userID = ReadConfig_bill.getBillPaymentUserID()
     password = ReadConfig_bill.getBillPaymentPassword()
     path = '../TestData/Test_Data.xlsx'
-    sheetName = 'All BillPayment1'
+    sheetName = 'All BillPayment'
 
     log = LogGen.genlog()
 
@@ -23,7 +23,8 @@ class Test_011_Payment:
     result_failed = []
     acc_balance_list = []
     passed_list = {}
-    def test_011_Payment(self, setup):
+    failed_list = {}
+    def test_012_Payment_Fee(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
         sleep(7)
@@ -45,6 +46,8 @@ class Test_011_Payment:
         for r in range(2, self.rows+1):
             self.home_acc_blnc = self.home.getAccountBalance()
             self.acc_balance_list.append(self.home_acc_blnc)
+
+            # assert False
             ## menu
             self.menu.clickMenu()
             self.menu.click_payment_button()
@@ -105,6 +108,8 @@ class Test_011_Payment:
                 self.cvt_value = self.bill.get_converted_value()
                 self.log.info("Attempt to Get Fee Charge.")
                 self.fee_charge = self.bill.get_fee_charge()
+                self.log.info("Attempt to get exchange rate value.")
+                self.exchane_rate = self.bill.get_exchange_rate()
                 self.log.info("Attempt to Click Confirm Button.")
                 self.bill.clickConfirm()
                 sleep(0.5)
@@ -135,20 +140,34 @@ class Test_011_Payment:
                 except:
                     self.bill.click_SPN_Logo()
                     self.log.info("***************Test %s***************", self.billType)
-                    # print()
-                    # print(self.billType)
-                    self.passed_list[self.billType] = [self.biller, self.consumer, self.amt, self.fee_charge, self.cvt_value]
-                    # print(colored("============================================", 'green'))
-                    # print(colored(self.biller, 'green'))
-                    # print(colored(self.consumer, 'green'))
-                    # print(colored("==> Passed", 'green'))
-                    # print('Details: ')
-                    # print("Transfer Amount: ", self.amt, self.amount_ccy)
-                    # print("Fee Charge: ", self.fee_charge, 'USD')
-                    # print("Converted Value: ", self.cvt_value, 'USD')
-                    # print(colored("============================================", 'green'))
-                    # self.result_passed.append("Passed")
                     sleep(2)
+                    self.home_acc_blnc = self.home.getAccountBalance()
+                    self.acc_balance_list.append(self.home_acc_blnc)
+                    print(self.acc_balance_list)
+                    self.initialBlnc = self.acc_balance_list[-2]
+                    self.total = self.amt + self.fee_charge
+                    if self.amount_ccy == 'KHR':
+                        self.total_cvt = self.total/self.exchane_rate
+                        self.total_cvt = round(self.total_cvt, 2)
+                        self.debitedBlnc1 = self.initialBlnc - self.total_cvt
+                    else:
+                        self.debitedBlnc1 = self.initialBlnc - self.total
+                    self.debitedBlnc = round(self.debitedBlnc1, 2)
+                    if self.debitedBlnc == self.acc_balance_list[-1]:
+                        self.passed_list[self.billType] = [self.biller, self.consumer, self.amt, self.fee_charge, self.cvt_value, self.amt+self.fee_charge, self.initialBlnc, self.debitedBlnc]
+                    else:
+                        self.result_failed.append("Failed")
+                        print()
+                        print(self.billType)
+                        print(colored("============================================", 'red'))
+                        print(colored(self.biller, 'yellow'))
+                        print(colored(self.consumer, 'yellow'))
+                        print("Initial Balance:", self.acc_balance_list[-2], ", TXN Amount:", self.amt,self.amount_ccy, "Fee Charge:", self.fee_charge,self.amount_ccy, ", Exchange Rate:", self.exchane_rate,self.amount_ccy)
+                        print("Debited Balance: ", self.acc_balance_list[-1])
+                        print("It should be: ", self.debitedBlnc)
+                        print(colored('Fee Charge does not deducted!!!', 'yellow'))
+                        print(colored("==> Failed", 'red'))
+                        print(colored("============================================", 'red'))
                     continue
             except:
                 self.message = self.bill.getPopUpMessage()
@@ -180,12 +199,11 @@ class Test_011_Payment:
             print("Transfer Amount:", self.passed_list[i][2])
             print("Fee Charge:", self.passed_list[i][3])
             print("Converted Value:", self.passed_list[i][4])
+            print("Total:", self.passed_list[i][5])
+            print("Initial Balance:", self.passed_list[i][6])
+            print("Debited Balance:", self.passed_list[i][7])
             print(colored("============================================\n", 'green'))
-        print("Passed:", len(self.passed_list))
-        print("Failed:", len(self.result_failed), self.result_failed)
-        if "Failed" not in self.result_failed:
-            assert True
-            self.driver.close()
-        else:
-            self.driver.close()
-            assert False
+        print(colored("Passed:", 'green'), len(self.passed_list))
+        print(colored("Failed:", 'red'), len(self.result_failed))
+        self.driver.close()
+        assert False

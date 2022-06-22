@@ -44,7 +44,7 @@ class Test_004_Electric:
 
         self.rows = XLUtils.getRowCount(self.path, 'Internet')
 
-        ## Electricity
+        ## Internet
         self.bill.clickInternet()
         self.bill.selectUSDaccount()
 

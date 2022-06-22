@@ -71,7 +71,6 @@ class Test_004_Electric:
             self.log.info("Second Pay button clicked.")
             sleep(1)
             try:
-                self.buttonText = self.bill.getConfirmButtonText()
                 self.log.info("Confirm button found.")
                 self.bill.clickConfirm()
                 self.log.info("Confirm button clicked.")

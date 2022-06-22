@@ -39,7 +39,7 @@ class LoginPage:
 
     def clickLogin(self):
         self.driver.find_element(By.ID, self.button_login_id).click()
-        sleep(1)
+        sleep(2)
 
     def getOtpMessage(self):
         otpMessage = self.driver.find_element(By.CLASS_NAME, self.message_otp_class).text
@@ -50,7 +50,7 @@ class LoginPage:
         self.otp = self.driver.find_element(By.ID, self.text_opt_id).text
         self.driver.find_element(By.ID, self.textbox_otp_id).send_keys(self.otp)
         self.driver.find_element(By.ID, self.button_confirmOtp_id).click()
-        sleep(2)
+        sleep(3)
 
     def OkAndCancelOtp(self):
         self.driver.find_element(By.CLASS_NAME, self.button_otpOk_class).click()

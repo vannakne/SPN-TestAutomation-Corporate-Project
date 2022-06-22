@@ -243,7 +243,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 24-Apr-2022 at 17:46:41 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 20-May-2022 at 12:04:33 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -268,7 +268,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Tester</td>
         <td>KEEN Tester</td></tr></table>
     <h2>Summary</h2>
-    <p>1 tests ran in 19.14 seconds. </p>
+    <p>1 tests ran in 195.00 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">0 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -283,11 +283,119 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="failed results-table-row">
         <tr>
           <td class="col-result">Failed</td>
-          <td class="col-name">test_login.py::Test_001_Login::test_login</td>
-          <td class="col-duration">18.93</td>
+          <td class="col-name">test_all_billPayment.py::Test_011_Payment::test_011_Payment</td>
+          <td class="col-duration">194.29</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">self = &lt;testCases.test_login.Test_001_Login object at 0x10f8e59d0&gt;<br/>setup = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;9e65a3107efe9409e60e3aad5ee6f00e&quot;)&gt;<br/><br/>    def test_login(self, setup):<br/>        self.mylogger.info(&quot;**************** Test_001_Login ****************&quot;)<br/>        self.mylogger.info(&quot;**************** Start Login Test ****************&quot;)<br/>        self.driver = setup<br/>        self.mylogger.info(&quot;******** Opening URL **********&quot;)<br/>        self.driver.get(self.baseURL)<br/>        sleep(7)<br/>        self.lp = LoginPage(self.driver)<br/>        self.hp = HomePage(self.driver)<br/>    <br/>        self.lp.setCorpoateID(self.corporateId)<br/>        self.lp.setUserID(self.userId)<br/>        self.lp.setPassword(self.password)<br/>        self.lp.clickLogin()<br/>        self.otpMessage = self.lp.getOtpMessage()<br/>        if self.otpMessage == &quot;OTP has been sent to your registered Mobile number&quot;:<br/>            assert True<br/>            self.driver.close()<br/>        else:<br/>            self.driver.save_screenshot(&quot;../ScreenShots/Test_001_Login.png&quot;)<br/>            self.driver.close()<br/>            # self.mylogger.error(&quot;******************* Actual Corp ID was:  *******************&quot;)<br/>&gt;           assert False<br/><span class="error">E           assert False</span><br/><br/>test_login.py:39: AssertionError<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:test_login.py:18 **************** Test_001_Login ****************
-INFO     root:test_login.py:19 **************** Start Login Test ****************
-INFO     root:test_login.py:21 ******** Opening URL **********<br/></div></td></tr></tbody></table></body></html>
+            <div class="log">self = &lt;testCases.test_all_billPayment.Test_011_Payment object at 0x111b54a00&gt;<br/>setup = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;4ffeb6c9c413b0dded8d761b57b3be66&quot;)&gt;<br/><br/>    def test_011_Payment(self, setup):<br/>        self.driver = setup<br/>        self.driver.get(self.baseURL)<br/>        sleep(5)<br/>    <br/>        self.lp = LoginPage(self.driver)<br/>    <br/>        ## Login Bill Payment User<br/>        self.lp.setCorpoateID(self.corpID)<br/>        self.lp.setUserID(self.userID)<br/>        self.lp.setPassword(self.password)<br/>        self.lp.clickLogin()<br/>        self.lp.setOtp()<br/>    <br/>        self.menu = Menu(self.driver)<br/>        self.bill = BillPaymentPage(self.driver)<br/>    <br/>        self.rows = XLUtils.getRowCount(self.path, &#x27;All BillPayment&#x27;)<br/>        for r in range(2, self.rows+1):<br/>            ## menu<br/>            self.menu.clickMenu()<br/>            self.menu.click_payment_button()<br/>            self.menu.click_payment_under_payment()<br/>    <br/>            self.billType = XLUtils.readData(self.path, &#x27;All BillPayment&#x27;, r, 1)<br/>            ## Choose a bill type<br/>            self.bill.choose_a_bill_type(self.billType)<br/>    <br/>            self.bill.selectUSDaccount()<br/>    <br/>            self.biller = XLUtils.readData(self.path, &#x27;All BillPayment&#x27;, r, 2)<br/>            self.bill.clickBillerDropDown()<br/>            self.bill.choose_a_biller(self.biller)<br/>            self.log.info(&quot;%s Found&quot;, self.biller)<br/>    <br/>            self.consumer = XLUtils.readData(self.path, &#x27;All BillPayment&#x27;, r, 3)<br/>            self.bill.fillConsumer(self.consumer)<br/>            self.bill.clickRemark()<br/>            sleep(1)<br/>            try:<br/>                self.message = self.bill.getPopUpMessage()<br/>                print()<br/>                print(self.billType)<br/>                print(colored(&quot;============================================&quot;, &#x27;red&#x27;))<br/>                print(colored(self.biller, &#x27;yellow&#x27;))<br/>                print(colored(self.consumer, &#x27;yellow&#x27;))<br/>                print(&#x27;Message: &#x27;, &#x27;\&quot;&#x27; + self.message + &#x27;\&quot;&#x27;)<br/>                print(colored(&quot;==&gt; Failed&quot;, &#x27;red&#x27;))<br/>                print(colored(&quot;============================================&quot;, &#x27;red&#x27;))<br/>                self.result_failed.append(&quot;Failed&quot;)<br/>                self.bill.clickOK()<br/>                sleep(2)<br/>                try:<br/>                    self.bill.click_SPN_Logo()<br/>                    sleep(2)<br/>                    continue<br/>                except:<br/>                    sleep(2)<br/>                    continue<br/>            except:<br/>                self.amount_ccy = self.bill.getAmountCurrency()<br/>                if self.amount_ccy == &#x27;USD&#x27;:<br/>                    self.bill.enterAmount(&#x27;1&#x27;)<br/>                    sleep(1)<br/>                elif self.amount_ccy == &#x27;KHR&#x27;:<br/>                    self.bill.enterAmount(&#x27;4000&#x27;)<br/>                    sleep(1)<br/>            self.bill.clickRemark()<br/>            sleep(0.1)<br/>            self.bill.clickPay()<br/>            self.log.info(&quot;Pay button clicked.&quot;)<br/>            sleep(1.5)<br/>            try:<br/>                self.bill.clickConfirm()<br/>                sleep(0.5)<br/>                self.bill.enterTPIN(&#x27;000000&#x27;)<br/>                sleep(0.5)<br/>                self.bill.clickSubmitTpin()<br/>                sleep(3)<br/>                try:<br/>                    self.message = self.bill.getPopUpMessage()<br/>                    print()<br/>                    print(self.billType)<br/>                    print(colored(&quot;============================================&quot;, &#x27;red&#x27;))<br/>                    print(colored(self.biller, &#x27;yellow&#x27;))<br/>                    print(colored(self.consumer, &#x27;yellow&#x27;))<br/>                    print(&#x27;Message: &#x27;, &#x27;\&quot;&#x27; + self.message + &#x27;\&quot;&#x27;)<br/>                    print(colored(&quot;==&gt; Failed&quot;, &#x27;red&#x27;))<br/>                    print(colored(&quot;============================================&quot;, &#x27;red&#x27;))<br/>                    self.result_failed.append(&quot;Failed&quot;)<br/>                    self.bill.clickOK()<br/>                    sleep(2)<br/>                    try:<br/>                        self.bill.click_SPN_Logo()<br/>                        sleep(2)<br/>                        continue<br/>                    except:<br/>                        sleep(2)<br/>                        continue<br/>                except:<br/>                    self.bill.click_SPN_Logo()<br/>                    self.log.info(&quot;***************Test %s***************&quot;, self.billType)<br/>                    print()<br/>                    print(self.billType)<br/>                    print(colored(&quot;============================================&quot;, &#x27;green&#x27;))<br/>                    print(colored(self.biller, &#x27;green&#x27;))<br/>                    print(colored(self.consumer, &#x27;green&#x27;))<br/>                    print(colored(&quot;==&gt; Passed&quot;, &#x27;green&#x27;))<br/>                    print(colored(&quot;============================================&quot;, &#x27;green&#x27;))<br/>                    self.result_passed.append(&quot;Passed&quot;)<br/>                    sleep(2)<br/>                    continue<br/>            except:<br/>                self.message = self.bill.getPopUpMessage()<br/>                print()<br/>                print(self.billType)<br/>                print(colored(&quot;============================================&quot;, &#x27;red&#x27;))<br/>                print(colored(self.biller, &#x27;yellow&#x27;))<br/>                print(colored(self.consumer, &#x27;yellow&#x27;))<br/>                print(&#x27;Message: &#x27;, &#x27;\&quot;&#x27;+self.message+&#x27;\&quot;&#x27;)<br/>                print(colored(&quot;==&gt; Failed&quot;, &#x27;red&#x27;))<br/>                print(colored(&quot;============================================&quot;, &#x27;red&#x27;))<br/>                self.result_failed.append(&quot;Failed&quot;)<br/>                self.bill.clickOK()<br/>                sleep(2)<br/>                try:<br/>                    self.bill.click_SPN_Logo()<br/>                    sleep(2)<br/>                    continue<br/>                except:<br/>                    sleep(2)<br/>                    continue<br/>        print(&quot;Passed:&quot;, len(self.result_passed), self.result_passed)<br/>        print(&quot;Failed:&quot;, len(self.result_failed), self.result_failed)<br/>        if &quot;Failed&quot; not in self.result_failed:<br/>            assert True<br/>            self.driver.close()<br/>        else:<br/>            self.driver.close()<br/>&gt;           assert False<br/><span class="error">E           assert False</span><br/><br/>test_all_billPayment.py:161: AssertionError<br/> ------------------------------Captured stdout call------------------------------ <br/>
+Water Supply
+============================================
+Siem Reap Water Supply Authority
+17010124001
+Message:  &quot;Error in Soap Service call&quot;
+==&gt; Failed
+============================================
+
+Electricity
+============================================
+Kok Tieng L Y P Group Co.ltd (OMC)
+1434510
+Message:  &quot;Service issue, Please try after sometime&quot;
+==&gt; Failed
+============================================
+
+Waste
+============================================
+Viphou Phopudh Utility
+00574
+Message:  &quot;Error Code SPN_BP_INVALID_BILL_NUMBER is Missing. Please Contact Helpdesk.&quot;
+==&gt; Failed
+============================================
+
+Electricity
+============================================
+EDC Kampong Cham
+1000110
+Message:  &quot;Service issue, Please try after sometime&quot;
+==&gt; Failed
+============================================
+
+Electricity
+============================================
+EDC Ratanakiri
+1000010
+Message:  &quot;Service issue, Please try after sometime&quot;
+==&gt; Failed
+============================================
+
+Electricity
+============================================
+EDC Siem Reap
+11298610
+Message:  &quot;Service issue, Please try after sometime&quot;
+==&gt; Failed
+============================================
+
+Electricity
+============================================
+Electricite Du Cambodge (Phnom Penh)
+6302856210
+Message:  &quot;Service issue, Please try after sometime&quot;
+==&gt; Failed
+============================================
+
+Education
+============================================
+Western International School Plc
+13N10120
+==&gt; Passed
+============================================
+
+Internet
+============================================
+MekongNet ISP
+001002
+Message:  &quot;Error in Soap Service call&quot;
+==&gt; Failed
+============================================
+
+Financial Service
+============================================
+Cambodian Labor Care
+000000000123
+==&gt; Passed
+============================================
+
+Real Estate
+============================================
+Borey Leng Navatra
+NR3AA006
+Message:  &quot;Error in Soap Service call&quot;
+==&gt; Failed
+============================================
+Passed: 2 [&#x27;Passed&#x27;, &#x27;Passed&#x27;]
+Failed: 9 [&#x27;Failed&#x27;, &#x27;Failed&#x27;, &#x27;Failed&#x27;, &#x27;Failed&#x27;, &#x27;Failed&#x27;, &#x27;Failed&#x27;, &#x27;Failed&#x27;, &#x27;Failed&#x27;, &#x27;Failed&#x27;]
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:test_all_billPayment.py:55 Siem Reap Water Supply Authority Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:55 Kok Tieng L Y P Group Co.ltd (OMC) Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:55 Viphou Phopudh Utility Found
+INFO     root:test_all_billPayment.py:55 EDC Kampong Cham Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:55 EDC Ratanakiri Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:55 EDC Siem Reap Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:55 Electricite Du Cambodge (Phnom Penh) Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:55 Western International School Plc Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:123 ***************Test Education***************
+INFO     root:test_all_billPayment.py:55 MekongNet ISP Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:55 Cambodian Labor Care Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.
+INFO     root:test_all_billPayment.py:123 ***************Test Financial Service***************
+INFO     root:test_all_billPayment.py:55 Borey Leng Navatra Found
+INFO     root:test_all_billPayment.py:92 Pay button clicked.<br/></div></td></tr></tbody></table></body></html>

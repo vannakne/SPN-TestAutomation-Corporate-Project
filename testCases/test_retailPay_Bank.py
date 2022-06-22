@@ -5,7 +5,7 @@ from termcolor import colored
 
 from pageObject.HomePage import HomePage
 from pageObject.LoginPage import LoginPage
-from pageObject.WalletAndCardTransferPage import WalletTransferPage
+from pageObject.RetailPayPage import RetailPay
 from utilities import XLUtils
 from utilities.customLogger import LogGen
 from utilities.readProperty import ReadConfig_Wallet
@@ -13,21 +13,21 @@ from pageObject.Menu import Menu
 from pageObject.BillPaymentPage import BillPaymentPage
 
 
-class Test_010_Wallet:
+class Test_RetailPay:
     baseURL = ReadConfig_Wallet.getApplicationURL()
     corpID = ReadConfig_Wallet.getWalletCorpID()
     userID = ReadConfig_Wallet.getWalletUserID()
     password = ReadConfig_Wallet.getWalletPassword()
     path = '../TestData/Test_Data.xlsx'
-    sheetName = 'All Wallet'
+    sheetName = 'RetailPay'
 
     log = LogGen.genlog()
 
     result_passed = []
     result_failed = []
 
-    @pytest.mark.wallet
-    def test_010_wallet(self, setup):
+    @pytest.mark.retailPay
+    def test_to_bank_account(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
         sleep(7)
@@ -45,38 +45,37 @@ class Test_010_Wallet:
 
         self.menu = Menu(self.driver)
         self.home = HomePage(self.driver)
-        self.wallet = WalletTransferPage(self.driver)
+        self.retail = RetailPay(self.driver)
         self.bill = BillPaymentPage(self.driver)
 
         self.rows = XLUtils.getRowCount(self.path, self.sheetName)
         for r in range(2, self.rows + 1):
             ## menu
             self.menu.clickMenu()
-            self.menu.click_wallet_and_card_Transfer_button()
-            # self.home.clickWalletAndCard()
+            self.menu.click_retail_pay_button()
+            self.menu.click_retail_pay_to_bank()
 
-            self.walletType = XLUtils.readData(self.path, self.sheetName, r, 1)
+            self.payeeBank = XLUtils.readData(self.path, self.sheetName, r, 1)
 
-            ## Choose a Wallet type
-            self.wallet.choose_a_Wallet_type(self.walletType)
-            self.wallet.selectUSDaccount()
-
+            self.retail.selectUSDaccount()
+            self.retail.clickPayeeBank_Dropdown()
+            self.retail.choose_a_payee_bank(self.payeeBank)
             self.conusmerNum = XLUtils.readData(self.path, self.sheetName, r, 2)
-            self.wallet.enter_consumer_number(self.conusmerNum)
-            self.wallet.clickRemark()
+            self.retail.enter_consumer_number(self.conusmerNum)
+            self.retail.clickRemark()
             sleep(1)
             try:
-                self.message = self.wallet.getPopUpMessage()
+                self.message = self.retail.getPopUpMessage()
                 print()
-                print(self.walletType)
+                print(self.payeeBank)
                 print(colored("============================================", 'red'))
-                print(colored(self.walletType, 'yellow'))
+                print(colored(self.payeeBank, 'yellow'))
                 print(colored(self.conusmerNum, 'yellow'))
                 print('Message: ', '\"' + self.message + '\"')
                 print(colored("==> Failed", 'red'))
                 print(colored("============================================", 'red'))
                 self.result_failed.append("Failed")
-                self.wallet.clickOK()
+                self.retail.clickOK()
                 sleep(2)
                 try:
                     self.bill.click_SPN_Logo()
@@ -86,36 +85,36 @@ class Test_010_Wallet:
                     sleep(2)
                     continue
             except:
-                self.amount_ccy = self.wallet.getAmountCCY()
+                self.amount_ccy = self.retail.getAmountCCY()
                 if self.amount_ccy == 'USD':
-                    self.wallet.enter_Amount('1')
+                    self.retail.enter_Amount('1')
                 elif self.amount_ccy == 'KHR':
-                    self.wallet.enter_Amount('4000')
-            self.wallet.clickRemark()
+                    self.retail.enter_Amount('4000')
+            self.retail.clickRemark()
             sleep(0.1)
-            self.wallet.clickPay()
+            self.retail.clickPay()
             self.log.info("Pay button clicked.")
             sleep(1.5)
             try:
-                self.amt = self.wallet.get_trf_amount()
-                self.wallet.clickConfirm()
+                self.amt = self.retail.get_trf_amount()
+                self.retail.clickConfirm()
                 sleep(0.5)
-                self.wallet.enter_Tpin('000000')
+                self.retail.enter_Tpin('000000')
                 sleep(0.5)
-                self.wallet.clickSubmit()
+                self.retail.clickSubmit()
                 sleep(3)
                 try:
-                    self.message = self.wallet.getPopUpMessage()
+                    self.message = self.retail.getPopUpMessage()
                     print()
-                    print(self.walletType)
+                    print(self.payeeBank)
                     print(colored("============================================", 'red'))
-                    print(colored(self.walletType, 'yellow'))
+                    print(colored(self.payeeBank, 'yellow'))
                     print(colored(self.conusmerNum, 'yellow'))
                     print('Message: ', '\"' + self.message + '\"')
                     print(colored("==> Failed", 'red'))
                     print(colored("============================================", 'red'))
                     self.result_failed.append("Failed")
-                    self.wallet.clickOK()
+                    self.retail.clickOK()
                     sleep(2)
                     try:
                         self.bill.click_SPN_Logo()
@@ -126,11 +125,11 @@ class Test_010_Wallet:
                         continue
                 except:
                     self.bill.click_SPN_Logo()
-                    self.log.info("***************Test %s***************", self.walletType)
+                    self.log.info("***************Test %s***************", self.payeeBank)
                     print()
-                    print(self.walletType)
+                    print(self.payeeBank)
                     print(colored("============================================", 'green'))
-                    print(colored(self.walletType, 'green'))
+                    print(colored(self.payeeBank, 'green'))
                     print(colored(self.conusmerNum, 'green'))
                     print(colored("==> Passed", 'green'))
                     print("Details:")
@@ -140,17 +139,17 @@ class Test_010_Wallet:
                     sleep(2)
                     continue
             except:
-                self.message = self.wallet.getPopUpMessage()
+                self.message = self.retail.getPopUpMessage()
                 print()
-                print(self.walletType)
+                print(self.payeeBank)
                 print(colored("============================================", 'red'))
-                print(colored(self.walletType, 'yellow'))
+                print(colored(self.payeeBank, 'yellow'))
                 print(colored(self.conusmerNum, 'yellow'))
                 print('Message: ', '\"' + self.message + '\"')
                 print(colored("==> Failed", 'red'))
                 print(colored("============================================", 'red'))
                 self.result_failed.append("Failed")
-                self.wallet.clickOK()
+                self.retail.clickOK()
                 sleep(2)
                 try:
                     self.bill.click_SPN_Logo()
@@ -162,3 +161,4 @@ class Test_010_Wallet:
         print(colored("Passed:", 'green'), len(self.result_passed))
         print(colored("Failed:", 'red'), len(self.result_failed))
         self.driver.close()
+        assert False

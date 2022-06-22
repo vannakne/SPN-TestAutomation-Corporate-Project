@@ -75,3 +75,24 @@ class ReadConfig_Wallet:
         password = config.get("Wallet Transfer login info", "password_bill")
         return password
 
+class ReadConfig_Transfer:
+    @staticmethod
+    def getApplicationURL():
+        url = config.get("Fund Transfer login info", "baseURL")
+        return url
+
+    @staticmethod
+    def getCorpID():
+        corpID = config.get('Fund Transfer login info', 'corporateId')
+        return corpID
+
+    @staticmethod
+    def getUserID():
+        userID = config.get("Fund Transfer login info", "userId")
+        return userID
+
+    @staticmethod
+    def getPassword():
+        password = config.get("Fund Transfer login info", "password")
+        return password
+

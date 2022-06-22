@@ -19,7 +19,7 @@ class Test_010_Wallet:
     userID = ReadConfig_Wallet.getWalletUserID()
     password = ReadConfig_Wallet.getWalletPassword()
     path = '../TestData/Test_Data.xlsx'
-    sheetName = 'All Wallet'
+    sheetName = 'Local Bank via Bakong'
 
     log = LogGen.genlog()
 
@@ -27,7 +27,7 @@ class Test_010_Wallet:
     result_failed = []
 
     @pytest.mark.wallet
-    def test_010_wallet(self, setup):
+    def test_020_local_bank_via_bakong(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
         sleep(7)
@@ -55,22 +55,24 @@ class Test_010_Wallet:
             self.menu.click_wallet_and_card_Transfer_button()
             # self.home.clickWalletAndCard()
 
-            self.walletType = XLUtils.readData(self.path, self.sheetName, r, 1)
+            self.WalletType = XLUtils.readData(self.path, self.sheetName, r, 1)
 
             ## Choose a Wallet type
-            self.wallet.choose_a_Wallet_type(self.walletType)
+            self.wallet.choose_a_Wallet_type(self.WalletType)
             self.wallet.selectUSDaccount()
 
-            self.conusmerNum = XLUtils.readData(self.path, self.sheetName, r, 2)
+            self.bank = XLUtils.readData(self.path, self.sheetName, r, 2)
+            self.conusmerNum = XLUtils.readData(self.path, self.sheetName, r, 3)
+            self.wallet.choose_a_local_bank(self.bank)
             self.wallet.enter_consumer_number(self.conusmerNum)
             self.wallet.clickRemark()
             sleep(1)
             try:
                 self.message = self.wallet.getPopUpMessage()
                 print()
-                print(self.walletType)
+                print(self.WalletType)
                 print(colored("============================================", 'red'))
-                print(colored(self.walletType, 'yellow'))
+                print(colored(self.WalletType, 'yellow'))
                 print(colored(self.conusmerNum, 'yellow'))
                 print('Message: ', '\"' + self.message + '\"')
                 print(colored("==> Failed", 'red'))
@@ -107,9 +109,9 @@ class Test_010_Wallet:
                 try:
                     self.message = self.wallet.getPopUpMessage()
                     print()
-                    print(self.walletType)
+                    print(self.WalletType)
                     print(colored("============================================", 'red'))
-                    print(colored(self.walletType, 'yellow'))
+                    print(colored(self.WalletType, 'yellow'))
                     print(colored(self.conusmerNum, 'yellow'))
                     print('Message: ', '\"' + self.message + '\"')
                     print(colored("==> Failed", 'red'))
@@ -126,11 +128,11 @@ class Test_010_Wallet:
                         continue
                 except:
                     self.bill.click_SPN_Logo()
-                    self.log.info("***************Test %s***************", self.walletType)
+                    self.log.info("***************Test %s***************", self.WalletType)
                     print()
-                    print(self.walletType)
+                    print(self.WalletType)
                     print(colored("============================================", 'green'))
-                    print(colored(self.walletType, 'green'))
+                    print(colored(self.WalletType, 'green'))
                     print(colored(self.conusmerNum, 'green'))
                     print(colored("==> Passed", 'green'))
                     print("Details:")
@@ -142,9 +144,9 @@ class Test_010_Wallet:
             except:
                 self.message = self.wallet.getPopUpMessage()
                 print()
-                print(self.walletType)
+                print(self.WalletType)
                 print(colored("============================================", 'red'))
-                print(colored(self.walletType, 'yellow'))
+                print(colored(self.WalletType, 'yellow'))
                 print(colored(self.conusmerNum, 'yellow'))
                 print('Message: ', '\"' + self.message + '\"')
                 print(colored("==> Failed", 'red'))

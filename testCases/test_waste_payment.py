@@ -15,7 +15,6 @@ class Test_011_Payment:
     userID = ReadConfig_bill.getBillPaymentUserID()
     password = ReadConfig_bill.getBillPaymentPassword()
     path = '../TestData/Test_Data.xlsx'
-    sheetName = 'All BillPayment1'
 
     log = LogGen.genlog()
 
@@ -26,7 +25,7 @@ class Test_011_Payment:
     def test_011_Payment(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
-        sleep(7)
+        sleep(5)
 
         self.lp = LoginPage(self.driver)
 
@@ -41,27 +40,27 @@ class Test_011_Payment:
         self.menu = Menu(self.driver)
         self.bill = BillPaymentPage(self.driver)
 
-        self.rows = XLUtils.getRowCount(self.path, self.sheetName)
+        self.rows = XLUtils.getRowCount(self.path, 'Waste')
         for r in range(2, self.rows+1):
-            self.home_acc_blnc = self.home.getAccountBalance()
-            self.acc_balance_list.append(self.home_acc_blnc)
+            # self.home_acc_blnc = self.home.getAccountBalance()
+            # self.acc_balance_list.append(self.home_acc_blnc)
             ## menu
             self.menu.clickMenu()
             self.menu.click_payment_button()
             self.menu.click_payment_under_payment()
 
-            self.billType = XLUtils.readData(self.path, self.sheetName, r, 1)
+            self.billType = 'Waste'
             ## Choose a bill type
             self.bill.choose_a_bill_type(self.billType)
 
             self.bill.selectUSDaccount()
 
-            self.biller = XLUtils.readData(self.path, self.sheetName, r, 2)
+            self.biller = XLUtils.readData(self.path, 'Waste', r, 1)
             self.bill.clickBillerDropDown()
             self.bill.choose_a_biller(self.biller)
             self.log.info("%s Found", self.biller)
 
-            self.consumer = XLUtils.readData(self.path, self.sheetName, r, 3)
+            self.consumer = XLUtils.readData(self.path, 'Waste', r, 2)
             self.bill.fillConsumer(self.consumer)
             self.bill.clickRemark()
             sleep(1)
@@ -97,7 +96,7 @@ class Test_011_Payment:
             sleep(0.1)
             self.bill.clickPay()
             self.log.info("Pay button clicked.")
-            sleep(3)
+            sleep(1)
             try:
                 self.log.info("Attempt to Get Amount Transfer.")
                 self.amt = self.bill.get_trf_amount()
@@ -147,7 +146,7 @@ class Test_011_Payment:
                     # print("Fee Charge: ", self.fee_charge, 'USD')
                     # print("Converted Value: ", self.cvt_value, 'USD')
                     # print(colored("============================================", 'green'))
-                    # self.result_passed.append("Passed")
+                    self.result_passed.append("Passed")
                     sleep(2)
                     continue
             except:
@@ -170,19 +169,9 @@ class Test_011_Payment:
                 except:
                     sleep(2)
                     continue
-
-        for i in self.passed_list:
-            print(i)
-            print(colored("============================================", 'green'))
-            print("Biller:", self.passed_list[i][0])
-            print("Consumer No:", self.passed_list[i][1])
-            print("Details: ")
-            print("Transfer Amount:", self.passed_list[i][2])
-            print("Fee Charge:", self.passed_list[i][3])
-            print("Converted Value:", self.passed_list[i][4])
-            print(colored("============================================\n", 'green'))
-        print("Passed:", len(self.passed_list))
+        print("Passed:", len(self.result_passed), self.result_passed)
         print("Failed:", len(self.result_failed), self.result_failed)
+        print(self.passed_list)
         if "Failed" not in self.result_failed:
             assert True
             self.driver.close()
